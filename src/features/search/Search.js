@@ -48,11 +48,17 @@ const Search = () => {
           >
             <SearchIcon color={searchButtonColor()} />
           </div>
+          <div className={`${styles.suggestioncontainer} ${stateClass}`}>
+            <div className={`${styles.content}`}>
+              <div className={`flex-row justify-end`}>
+                <span className={`${styles.title}`}>son eklenenler</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className={styles.iconcontainer}>
           <RandomIcon />
         </div>
-        <div className={styles.suggestioncontainer}>sdf</div>
       </div>
     </div>
   );
