@@ -18,3 +18,7 @@
 .justify-end {
   justify-content: flex-end;
 }
+
+.no-shadow {
+  box-shadow: none !important;
+}

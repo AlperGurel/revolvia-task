@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16">
+    <defs>
+        <style>.de{fill:#d0d0d0;}.dec{fill:none;stroke:#f0f0f0;}</style>
+    </defs>
+    <g transform="translate(0)">
+        <rect class="de" width="17" height="16" rx="8" transform="translate(0)" />
+    </g>
+    <g transform="translate(5 5)">
+        <line class="dec" x2="7" y2="7" transform="translate(0 0)" />
+        <line class="dec" x1="7" y2="7" transform="translate(0 0)" />
+    </g>
+</svg>

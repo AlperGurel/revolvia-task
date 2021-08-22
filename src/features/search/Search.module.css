@@ -3,7 +3,7 @@
   align-items: center;
   /* box-shadow: 0px 3px 6px #1919191a; */
   display: flex;
-  height: 100%;
+  height: calc(100vh - 43px);
   flex-direction: column;
   padding-top: 43px;
   position: absolute;
@@ -91,6 +91,8 @@
 .suggestioncontainer {
   border-radius: 0px 0px 20px 20px;
   box-shadow: 0px 3px 6px #1919191a;
+  font-size: 12px;
+  color: #707070;
   height: 0px;
   left: 10px;
   max-width: 300px;
@@ -103,12 +105,14 @@
 }
 
 .suggestioncontainer.focused {
-  height: 200px;
+  /* height: 200px; */
+  height: auto;
   width: 100%;
 }
 
 .suggestioncontainer .content {
   padding: 20px;
+  position: relative;
 }
 
 .suggestioncontainer .title {
@@ -118,4 +122,99 @@
   line-height: 22px;
   text-align: end;
   padding-left: 15px;
+}
+
+.suggestioncontainer.typingerror .title {
+  color: #ff3439;
+}
+
+.suggestioncontainer.typing .title {
+  color: #268aff;
+}
+
+.suggestioncontainer.typing .content {
+  padding-bottom: 150px;
+}
+
+.suggestioncontainer .suggestion {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.suggestioncontainer.typingerror .suggestion {
+  display: none;
+}
+
+.suggestioncontainer.typing .suggestion {
+  display: none;
+}
+
+.suggestioncontainer .suggestion div:first-child {
+  color: #d0d0d0;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestioncontainer .suggestion div:nth-child(2) {
+  margin-left: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.suggestioncontainer .suggestion span {
+  color: black;
+}
+
+.suggestioncontainer .result {
+  color: #191919;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.24px;
+  line-height: 24px;
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestioncontainer .label {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  border: 1px solid #dbdbdb;
+  margin-left: 5px;
+  padding: 0px 8px;
+}
+
+.suggestioncontainer .label span {
+  border-radius: 100%;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border: 1px solid #dbdbdb;
+}
+
+.suggestioncontainer button {
+  align-items: center;
+  background: #268aff;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  height: 36px;
+  justify-content: space-between;
+  line-height: 22px;
+  outline: none;
+  position: absolute;
+  right: 18px;
+  bottom: 25px;
+  padding: 0px 28px;
+  width: 116px;
 }
