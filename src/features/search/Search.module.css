@@ -145,6 +145,10 @@
   align-items: center;
 }
 
+.suggestioncontainer .suggestion:hover {
+  background-color: #f0f0f059;
+}
+
 .suggestioncontainer.typingerror .suggestion {
   display: none;
 }
@@ -182,6 +186,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.suggestioncontainer .result:hover {
+  background-color: #f0f0f059;
 }
 
 .suggestioncontainer .label {

@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchSearchResult, fetchNewsResult, fetchRandom } from "./searchAPI";
+import {
+  fetchSearchResult,
+  fetchRandom,
+  fetchSingleNew,
+  fetchResult,
+} from "./searchAPI";
 
 const initialState = {
   keyword: "",
@@ -8,30 +13,49 @@ const initialState = {
   latest: [],
   status: "idle",
   page: "search",
+  filter: {
+    direct: "",
+    category: "",
+    editor: "",
+    keyword: "",
+  },
+  order: "latest",
 };
 
 //THUNKS
+export const setSingleNewById = createAsyncThunk(
+  "search/fetchSingle",
+  async (id, { dispatch, getState }) => {
+    dispatch(setNews([]));
+    const response = await fetchSingleNew(id);
+    return response.data;
+  }
+);
+
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",
   async (keyword, { dispatch, getState }) => {
     dispatch(setResult([]));
-    const response = await fetchSearchResult(getState().search.keyword);
+    const response = await fetchSearchResult(getState().search.filter.keyword);
     return response.data;
   }
 );
 
 export const fetchNews = createAsyncThunk(
   "search/fetchNews",
-  async (keyword, { dispatch, getState }) => {
-    dispatch(setResult([]));
-    const response = await fetchNewsResult(getState().search.keyword);
+  async (none, { dispatch, getState }) => {
+    // dispatch(setResult([]));
+    const response = await fetchResult(
+      getState().search.filter,
+      getState().search.order
+    );
     return response.data;
   }
 );
 
 export const fetchLatest = createAsyncThunk(
   "search/fetchLatest",
-  async (undefined, { dispatch, getState }) => {
+  async (none, { dispatch, getState }) => {
     dispatch(setLatest([]));
     const response = await fetchRandom();
     return response.data;
@@ -44,7 +68,7 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     setKeyword: (state, action) => {
-      state.keyword = action.payload;
+      state.filter.keyword = action.payload;
     },
     setResult: (state, action) => {
       state.result = action.payload;
@@ -58,6 +82,21 @@ export const searchSlice = createSlice({
     setLatest: (state, action) => {
       state.latest = action.payload;
     },
+    setFilterDirect: (state, action) => {
+      state.filter.keyword = "";
+      state.filter.direct = action.payload;
+    },
+    setFilterEditor: (state, action) => {
+      state.filter.keyword = "";
+      state.filter.editor = action.payload;
+    },
+    setFilterCategory: (state, action) => {
+      state.filter.keyword = "";
+      state.filter.category = action.payload;
+    },
+    setNewsOrder: (state, action) => {
+      state.order = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -65,7 +104,7 @@ export const searchSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchResults.fulfilled, (state, action) => {
-        if (action.payload.length == 0) {
+        if (action.payload.length === 0) {
           state.status = "failed";
           state.result = [];
         } else {
@@ -74,26 +113,36 @@ export const searchSlice = createSlice({
         }
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
-        if (action.payload.length == 0) {
-          state.news = [];
-        } else {
-          state.news = action.payload;
-        }
+        state.news = action.payload;
       })
       .addCase(fetchLatest.fulfilled, (state, action) => {
         state.latest = action.payload;
+      })
+      .addCase(setSingleNewById.fulfilled, (state, action) => {
+        state.news = action.payload;
       });
   },
 });
 
-export const { setKeyword, setResult, setPage, setNews, setLatest } =
-  searchSlice.actions;
+export const {
+  setKeyword,
+  setResult,
+  setPage,
+  setNews,
+  setLatest,
+  setFilterDirect,
+  setFilterEditor,
+  setFilterCategory,
+  setNewsOrder,
+} = searchSlice.actions;
 export default searchSlice.reducer;
 
 //SELECTORS
 export const selectSearchResult = (state) => state.search.result;
 export const selectSearchStatus = (state) => state.search.status;
-export const selectKeyword = (state) => state.search.keyword;
+export const selectKeyword = (state) => state.search.filter.keyword;
 export const selectPage = (state) => state.search.page;
 export const selectNews = (state) => state.search.news;
 export const selectLatest = (state) => state.search.latest;
+export const selectFilter = (state) => state.search.filter;
+export const selectOrder = (state) => state.search.order;

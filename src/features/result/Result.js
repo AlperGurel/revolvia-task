@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -6,7 +6,12 @@ import {
   setKeyword,
   selectNews,
   fetchNews,
+  selectFilter,
+  selectOrder,
+  setFilterEditor,
+  setFilterCategory,
 } from "../search/searchSlice";
+import { data } from "../search/dummy.js";
 
 import FilterSidebar from "./FilterSidebar";
 
@@ -16,7 +21,6 @@ import { ReactComponent as RandomIcon } from "./assets/random-light.svg";
 import { ReactComponent as ClearIcon } from "./assets/delete.svg";
 import { ReactComponent as SortIcon } from "./assets/sort-amount-down-alt-light.svg";
 import { ReactComponent as MiniClearIcon } from "./assets/times-light.svg";
-import { ReactComponent as DateIcon } from "./assets/Group327.svg";
 import { ReactComponent as CategoryIcon } from "./assets/Ellipse152.svg";
 import { ReactComponent as EditorIcon } from "./assets/user-circle-solid.svg";
 import { ReactComponent as CardIcon } from "./assets/cardicon.svg";
@@ -56,7 +60,9 @@ const SearchBar = () => {
         </div>
         <div
           className={`${styles.iconcontainer} ${styles.searchicon} `}
-          onClick={() => {}}
+          onClick={() => {
+            dispatch(fetchNews());
+          }}
         >
           <SearchIcon />
         </div>
@@ -74,29 +80,49 @@ const Shuffle = () => {
 };
 
 const Filters = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  const order = useSelector(selectOrder);
+
   return (
     <div className={`${styles.filters}`}>
       <div className={`${styles.filteritem}`}>
         <div className={`flex-row align-center`}>
           <SortIcon />
-          <span>Yeniden Eskiye</span>
-          <MiniClearIcon />
+          <span>
+            {order === "latest" ? "Yeniden Eskiye" : "Eskiden Yeniye"}
+          </span>
+          {/* <MiniClearIcon /> */}
         </div>
       </div>
-      <div className={`${styles.filteritem}`}>
-        <div className={`flex-row align-center`}>
-          <CategoryIcon />
-          <span>Tüm Kategoriler</span>
-          <MiniClearIcon />
+      {filter.category && (
+        <div className={`${styles.filteritem}`}>
+          <div className={`flex-row align-center`}>
+            <CategoryIcon />
+            <span>{data.categoriesMap[filter.category]}</span>
+            <MiniClearIcon
+              onClick={() => {
+                dispatch(setFilterCategory(""));
+                dispatch(fetchNews());
+              }}
+            />
+          </div>
         </div>
-      </div>
-      <div className={`${styles.filteritem}`}>
-        <div className={`flex-row align-center`}>
-          <EditorIcon />
-          <span>Tüm Editörler</span>
-          <MiniClearIcon />
+      )}
+      {filter.editor && (
+        <div className={`${styles.filteritem}`}>
+          <div className={`flex-row align-center`}>
+            <EditorIcon />
+            <span>{data.authorsMap[filter.editor]}</span>
+            <MiniClearIcon
+              onClick={() => {
+                dispatch(setFilterEditor(""));
+                dispatch(fetchNews());
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -115,7 +141,7 @@ const ResultContainer = () => {
       <div>
         <div className={`${styles.cardscontainer}`}>
           {news.map((el) => {
-            return <ResultCard data={el} />;
+            return <ResultCard key={el.id} data={el} />;
           })}
         </div>
       </div>

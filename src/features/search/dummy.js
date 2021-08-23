@@ -128,6 +128,14 @@ export const data = {
     },
   ],
 
+  categoriesMap: {
+    1: "Haber",
+    2: "Ekonomi",
+    3: "Uzay",
+    4: "Spor",
+    5: "Tarih",
+  },
+
   authors: [
     {
       title: "Selim Yaman",
@@ -150,4 +158,11 @@ export const data = {
       id: 4,
     },
   ],
+
+  authorsMap: {
+    1: "Selim Yaman",
+    2: "Mehmet Karşı",
+    3: "Ceren Dizdar",
+    4: "Merve Küçük",
+  },
 };

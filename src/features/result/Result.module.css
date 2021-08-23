@@ -69,6 +69,10 @@
   line-height: 22px;
 }
 
+.filteritem svg {
+  cursor: pointer;
+}
+
 .resultcontainer > div {
   background-color: #f7f7f7;
   padding-left: 25px;

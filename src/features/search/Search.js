@@ -10,6 +10,9 @@ import {
   setPage,
   selectLatest,
   fetchLatest,
+  setFilterDirect,
+  setFilterEditor,
+  setFilterCategory,
 } from "./searchSlice";
 
 import styles from "./Search.module.css";
@@ -27,11 +30,11 @@ const Search = () => {
   const apiSearchStatus = useSelector(selectSearchStatus);
 
   const stateClass = () => {
-    if (searchStatus == "focused") {
+    if (searchStatus === "focused") {
       return styles.focused;
-    } else if (searchStatus == "typingError") {
+    } else if (searchStatus === "typingError") {
       return `${styles.focused} ${styles.typingerror}`;
-    } else if (searchStatus == "typing") {
+    } else if (searchStatus === "typing") {
       return `${styles.focused} ${styles.typing}`;
     }
   };
@@ -81,7 +84,7 @@ const Search = () => {
             onChange={(e) => {
               dispatch(setKeyword(e.target.value));
 
-              if (e.target.value.length == 0) {
+              if (e.target.value.length === 0) {
                 setSearchStatus("focused");
               } else if (e.target.value.length < 3) {
                 setSearchStatus("typingError");
@@ -158,11 +161,18 @@ const Suggestions = () => {
   return (
     <>
       {" "}
-      {latest.map((el, index) => {
+      {latest.map((el) => {
         return (
-          <div key={index} className={`${styles.suggestion}`}>
+          <div
+            key={el.id}
+            className={`${styles.suggestion}`}
+            onClick={() => {
+              dispatch(setFilterDirect(el.id));
+              dispatch(setPage("result"));
+            }}
+          >
             <div>
-              <span>{el}</span>
+              <span>{el.title}</span>
             </div>
             <div>
               <ChevronIcon />
@@ -179,7 +189,7 @@ const Results = () => {
 
   useEffect(() => {
     dispatch(fetchResults());
-  }, []);
+  }, [dispatch]);
 
   const data = useSelector(selectSearchResult);
 
@@ -187,7 +197,20 @@ const Results = () => {
     <>
       {data.map((el) => {
         return (
-          <div key={el.text} className={`${styles.result}`}>
+          <div
+            key={el.text}
+            className={`${styles.result}`}
+            onClick={() => {
+              if (el.labels.includes("Kategori")) {
+                dispatch(setFilterCategory(el.id));
+              } else if (el.labels.includes("Editör")) {
+                dispatch(setFilterEditor(el.id));
+              } else {
+                dispatch(setFilterDirect(el.id));
+              }
+              dispatch(setPage("result"));
+            }}
+          >
             {el.text}
             {el.labels.map((label) => {
               return (
