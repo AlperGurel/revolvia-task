@@ -7,6 +7,9 @@ import {
   selectSearchStatus,
   selectKeyword,
   setKeyword,
+  setPage,
+  selectLatest,
+  fetchLatest,
 } from "./searchSlice";
 
 import styles from "./Search.module.css";
@@ -108,6 +111,9 @@ const Search = () => {
               } ${stateClass()}`}
               onClick={() => {
                 handleSearchClick();
+                if (searchStatus === "typing") {
+                  dispatch(setPage("result"));
+                }
               }}
             >
               <SearchIcon color={searchButtonColor()} />
@@ -144,18 +150,19 @@ const DotsLoader = () => {
 };
 
 const Suggestions = () => {
-  const mock = [1, 2, 3, 4, 5];
+  const dispatch = useDispatch();
+  useState(() => {
+    dispatch(fetchLatest());
+  }, [dispatch]);
+  const latest = useSelector(selectLatest);
   return (
     <>
       {" "}
-      {mock.map((el) => {
+      {latest.map((el, index) => {
         return (
-          <div key={el} className={`${styles.suggestion}`}>
+          <div key={index} className={`${styles.suggestion}`}>
             <div>
-              <span>
-                Türkiye’de 2018’de 15 Yaşından Küçük 167 Kişinin Doğum Yaptığı
-                İddiası
-              </span>
+              <span>{el}</span>
             </div>
             <div>
               <ChevronIcon />
@@ -193,7 +200,11 @@ const Results = () => {
         );
       })}
       <div>
-        <button>
+        <button
+          onClick={() => {
+            dispatch(setPage("result"));
+          }}
+        >
           <SearchIcon />
           Ara
         </button>

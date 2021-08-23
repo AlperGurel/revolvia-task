@@ -1,0 +1,82 @@
+.container {
+  padding: 30px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 42px;
+  top: 142px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0px 3px 6px #1919191a;
+  z-index: 10;
+}
+
+.container .title {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.container .title > div {
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #458af7;
+  border-bottom: 1px solid #458af7;
+  padding-right: 40px;
+}
+
+.container .label {
+  font-size: 14px;
+  color: #707070;
+  margin: 10px 0;
+}
+
+.container .label span {
+  margin-left: 10px;
+}
+
+.container .datepicker {
+  cursor: pointer;
+  padding: 7px;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: white;
+  box-shadow: 0px 3px 6px #1919191a;
+  margin-bottom: 4px;
+}
+
+.container .dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 7px;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: white;
+  box-shadow: 0px 3px 6px #1919191a;
+  margin-bottom: 4px;
+}
+
+button {
+  margin-top: 30px;
+  align-items: center;
+  background: #268aff;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  height: 36px;
+  justify-content: space-between;
+  line-height: 22px;
+  outline: none;
+  right: 18px;
+  bottom: 25px;
+  padding: 0px 28px;
+  width: 116px;
+}

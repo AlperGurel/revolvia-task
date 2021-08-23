@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.5" viewBox="0 0 12.5 12.5">
+    <defs>
+        <style>.groupaa{fill:#268aff;}</style>
+    </defs>
+    <path class="groupaa" d="M6.251,12.5a6.248,6.248,0,1,1,4.42-1.83A6.257,6.257,0,0,1,6.251,12.5Zm0-9.746a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,6.251,2.754Z" transform="translate(0 0)" />
+    <circle class="groupaa" cx="1.81" cy="1.81" r="1.81" transform="translate(4.441 4.442)" />
+</svg>

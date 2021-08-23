@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+    <defs>
+        <style>.filterlight{fill:#fff;}</style>
+    </defs>
+    <path class="filterlight" d="M16.874,0H1.126a1.126,1.126,0,0,0-.8,1.92L6.75,8.341v6.565a1.125,1.125,0,0,0,.384.847l2.25,1.968a1.126,1.126,0,0,0,1.866-.847V8.341L17.669,1.92A1.126,1.126,0,0,0,16.874,0ZM10.125,7.875v9l-2.25-1.969V7.875l-6.75-6.75h15.75Z" transform="translate(0)" />
+</svg>

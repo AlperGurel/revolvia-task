@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6.69" height="12.327" viewBox="0 0 6.69 12.327">
+    <defs>
+        <style>.chevron{fill:#d0d0d0;}</style>
+    </defs>
+    <path class="chevron" d="M.1,6.4l.2.2a.332.332,0,0,0,.469,0l5.4-5.4,5.4,5.4a.332.332,0,0,0,.469,0l.2-.2a.332.332,0,0,0,0-.469L6.4.1a.332.332,0,0,0-.469,0L.1,5.929A.332.332,0,0,0,.1,6.4Z" transform="translate(6.69) rotate(90)" />
+</svg>
